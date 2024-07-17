@@ -1,0 +1,70 @@
+﻿@{
+    var grid = Html.DevExpress().GridView(settings => {
+        settings.Name = "GridView";
+        settings.CallbackRouteValues = new { Controller = "Users", Action = "GridViewPartial" };
+
+        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Users", Action = "GridViewPartialAddNew" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Users", Action = "GridViewPartialUpdate" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "Users", Action = "GridViewPartialDelete" };
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
+        settings.SettingsBehavior.ConfirmDelete = true;
+
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowNewButton = true;
+        settings.CommandColumn.ShowDeleteButton = true;
+        settings.CommandColumn.ShowEditButton = true;
+
+        settings.KeyFieldName = "userId";
+
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = true;
+        settings.Settings.ShowFilterRow = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+
+        //settings.Columns.Add(c =>
+        //{
+        //c.FieldName = "userId";
+        //c.Caption = "Id do usuário";
+        //});
+        settings.Columns.Add(c =>
+        {
+            c.FieldName = "name";
+            c.Caption = "Nome";
+        });
+        settings.Columns.Add(c =>{
+            c.FieldName = "role";
+            c.ColumnType = MVCxGridViewColumnType.ComboBox;
+            c.EditorProperties().ComboBox(l =>
+            {
+                l.Items.Add("Admin","Admin");
+                l.Items.Add("Usuário","User");
+                l.Items.Add("Funcionário","Employee");
+            });
+            c.Caption = "Cargo";
+
+        });
+        settings.Columns.Add(c => {
+            c.FieldName = "age";
+            c.Caption = "Idade";
+        });
+        settings.Columns.Add(c => {
+            c.FieldName = "bio";
+            c.Caption = "Biografia";
+        });
+        settings.Columns.Add(c =>
+        {
+            c.FieldName = "createdAt"; c.Caption = "Data de criação";
+            c.ColumnType = MVCxGridViewColumnType.DateEdit;
+        });
+    });
+    if (ViewData["EditError"] != null){
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()

@@ -45,6 +45,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DevExpress.Web.ASPxTreeList.v22.1, Version=22.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -246,6 +247,8 @@
     <Content Include="Views\Users\_GridViewPartial.cshtml" />
     <Content Include="Views\UsersCards\_CardViewPartial.cshtml" />
     <Content Include="Views\UsersCards\Index.cshtml" />
+    <Content Include="Views\Services\Index.cshtml" />
+    <Content Include="Views\Services\_TreeListPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -265,6 +268,7 @@
     <Compile Include="Controllers\GridViewController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SchedulerController.cs" />
+    <Compile Include="Controllers\ServicesController.cs" />
     <Compile Include="Controllers\UsersCardsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
@@ -272,6 +276,8 @@
     </Compile>
     <Compile Include="Models\Account\AccountViewModels.cs" />
     <Compile Include="Models\DbAp\Model1.cs" />
+    <Compile Include="Models\DbAp\service.cs" />
+    <Compile Include="Models\DbAp\sysdiagram.cs" />
     <Compile Include="Models\DbAp\user.cs" />
     <Compile Include="Models\GridView\GridViewHelper.cs" />
     <Compile Include="Models\Scheduler\SchedulerDataSource.cs" />

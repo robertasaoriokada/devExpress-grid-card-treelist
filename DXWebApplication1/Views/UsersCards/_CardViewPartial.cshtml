@@ -6,8 +6,11 @@
         settings.SettingsEditing.AddNewCardRouteValues = new { Controller = "UsersCards", Action = "CardViewPartialAddNew" };
         settings.SettingsEditing.UpdateCardRouteValues = new { Controller = "UsersCards", Action = "CardViewPartialUpdate" };
         settings.SettingsEditing.DeleteCardRouteValues = new { Controller = "UsersCards", Action = "CardViewPartialDelete" };
-        settings.SettingsEditing.Mode = CardViewEditingMode.EditForm;
+
         settings.SettingsBehavior.ConfirmDelete = true;
+        settings.SettingsEditing.Mode = CardViewEditingMode.PopupEditForm;
+        settings.SettingsPopup.EditForm.SettingsAdaptivity.Mode = PopupControlAdaptivityMode.Always;
+        settings.SettingsPopup.EditForm.SettingsAdaptivity.VerticalAlign = PopupAdaptiveVerticalAlign.WindowCenter;
 
         settings.KeyFieldName = "userId";
 
@@ -15,6 +18,22 @@
         settings.Settings.ShowHeaderPanel = true;
         settings.Settings.ShowHeaderFilterButton = true;
         settings.SettingsBehavior.AllowSelectByCardClick = true;
+        settings.Styles.Card.Width = 450;
+        settings.Width = Unit.Percentage(100);
+
+        settings.CardLayoutProperties.Items.Add(i =>
+        {
+
+            i.ParentContainerStyle.Font.Bold = true;
+
+        });
+
+        settings.SettingsAdaptivity.BreakpointsLayoutSettings.Breakpoints.Add(BreakpointsLayoutDeviceSizes.XLarge, 5);
+        settings.SettingsAdaptivity.BreakpointsLayoutSettings.Breakpoints.Add(BreakpointsLayoutDeviceSizes.Large, 4);
+        settings.SettingsAdaptivity.BreakpointsLayoutSettings.Breakpoints.Add(BreakpointsLayoutDeviceSizes.Medium, 3);
+        settings.SettingsAdaptivity.BreakpointsLayoutSettings.Breakpoints.Add(BreakpointsLayoutDeviceSizes.Small, 2);
+
+        settings.SettingsPager.SettingsTableLayout.ColumnCount = 2;
 
         settings.Columns.Add(c =>
         {
@@ -30,6 +49,13 @@
         {
             c.FieldName = "role";
             c.Caption = "Cargo";
+            c.ColumnType = MVCxCardViewColumnType.ComboBox;
+            c.EditorProperties().ComboBox(l =>
+            {
+                l.Items.Add("Admin", "Admin");
+                l.Items.Add("Usuário", "User");
+                l.Items.Add("Funcionário", "Employee");
+            });
         });
         settings.Columns.Add(c =>
         {
@@ -61,7 +87,7 @@
         settings.CardLayoutProperties.Items.Add("age");
         settings.CardLayoutProperties.Items.Add("bio");
         settings.CardLayoutProperties.Items.Add("createdAt");
-           
+
     });
     if (ViewData["EditError"] != null){
         cardView.SetEditErrorText((string)ViewData["EditError"]);

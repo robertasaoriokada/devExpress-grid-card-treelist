@@ -1,6 +1,100 @@
 ﻿
-@{
-    ViewBag.Title = "Index";
+@section Head {
+    <script type="text/javascript" src="@Url.Content("~/Content/CardView.js")"></script>
 }
+
+@Html.DevExpress().Menu(
+            settings =>
+            {
+                settings.Name = "MenuCardView";
+                settings.ItemAutoWidth = false;
+                settings.AllowSelectItem = false;
+                settings.ApplyItemStyleToTemplates = true;
+
+                settings.SettingsAdaptivity.Enabled = true;
+                settings.SettingsAdaptivity.EnableAutoHideRootItems = true;
+                settings.SettingsAdaptivity.EnableCollapseRootItemsToIcons = true;
+                settings.SettingsAdaptivity.CollapseRootItemsToIconsAtWindowInnerWidth = 600;
+
+                settings.Width = Unit.Percentage(100);
+                settings.ControlStyle.SeparatorWidth = Unit.Pixel(0);
+                settings.ControlStyle.CssClass = "page-toolbar";
+
+                settings.Styles.Item.CssClass = "item";
+                settings.Styles.Item.VerticalAlign = VerticalAlign.Middle;
+
+                settings.Images.Item.Width = Unit.Pixel(16);
+                settings.Images.Item.Height = Unit.Pixel(16);
+
+                settings.Items.Add(item =>
+                {
+                    item.Name = "New";
+                    item.Text = "New";
+                    item.Alignment = MenuItemAlignment.Right;
+                    item.AdaptivePriority = 2;
+                    item.Image.Url = "Content/Images/add.svg";
+                });
+                settings.Items.Add(item =>
+                {
+                    item.Name = "Edit";
+                    item.Text = "Edit";
+                    item.Alignment = MenuItemAlignment.Right;
+                    item.AdaptivePriority = 2;
+                    item.Image.Url = "Content/Images/edit.svg";
+                });
+                settings.Items.Add(item =>
+                {
+                    item.Name = "Delete";
+                    item.Text = "Delete";
+                    item.Alignment = MenuItemAlignment.Right;
+                    item.AdaptivePriority = 2;
+                    item.Image.Url = "Content/Images/delete.svg";
+                });
+                settings.Items.Add(item =>
+                {
+                    item.Name = "Export";
+                    item.Text = "Export";
+                    item.Alignment = MenuItemAlignment.Right;
+                    item.AdaptivePriority = 2;
+                    item.Image.Url = "Content/Images/export.svg";
+                });
+                settings.Items.Add(item =>
+                {
+                    item.Name = "ToggleFilterPanel";
+                    item.Text = "";
+                    item.GroupName = "Filter";
+                    item.Alignment = MenuItemAlignment.Right;
+                    item.AdaptivePriority = 1;
+                    item.Image.Url = "Content/Images/search.svg";
+                    item.Image.UrlChecked = "Content/Images/search-selected.svg";
+                });
+                settings.ClientSideEvents.ItemClick = "onPageToolbarItemClick";
+            }).GetHtml()
+
+@Html.DevExpress().Panel(panelSettings =>
+{
+panelSettings.Name = "filterPanel";
+panelSettings.Collapsible = true;
+panelSettings.ControlStyle.CssClass = "filter-panel";
+
+panelSettings.SettingsCollapsing.ExpandEffect = PanelExpandEffect.Slide;
+panelSettings.SettingsCollapsing.AnimationType = AnimationType.None;
+panelSettings.SettingsCollapsing.ExpandButton.Visible = false;
+
+panelSettings.SetContent(() =>
+    {
+        Html.DevExpress().ButtonEdit(buttonEditSettings =>
+        {
+        buttonEditSettings.Name = "searchButtonEdit";
+        buttonEditSettings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+        buttonEditSettings.Properties.Caption = "Search";
+        buttonEditSettings.Width = Unit.Percentage(100);
+        buttonEditSettings.Width = Unit.Percentage(100);
+    }).GetHtml();
+});
+
+panelSettings.ClientSideEvents.Expanded = "onFilterPanelExpanded";
+panelSettings.ClientSideEvents.Collapsed = "adjustPageControls";
+}).GetHtml()
 
 @Html.Action("CardViewPartial", "UsersCards")

@@ -130,6 +130,7 @@
     <Content Include="App_Data\ArticleContents.xml" />
     <Content Include="App_Data\Overview.html" />
     <Content Include="App_Data\OverviewContents.xml" />
+    <Content Include="Content\CardView.js" />
     <Content Include="Content\Content.css" />
     <Content Include="Content\GridView.css" />
     <Content Include="Content\GridView.js" />

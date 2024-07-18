@@ -282,6 +282,7 @@
     <Compile Include="Models\GridView\GridViewHelper.cs" />
     <Compile Include="Models\Scheduler\SchedulerDataSource.cs" />
     <Compile Include="Models\Scheduler\SchedulerHelper.cs" />
+    <Compile Include="Models\Services\UsersService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

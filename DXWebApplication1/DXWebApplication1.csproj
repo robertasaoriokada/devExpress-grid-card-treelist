@@ -218,6 +218,7 @@
     <Content Include="Content\Script.js" />
     <Content Include="Content\SignInRegister.css" />
     <Content Include="Content\SignInRegister.js" />
+    <Content Include="Content\TreeList.js" />
     <Content Include="Global.asax" />
   </ItemGroup>
   <ItemGroup>

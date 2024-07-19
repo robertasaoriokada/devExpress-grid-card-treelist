@@ -7,25 +7,53 @@
         settings.SettingsEditing.AddNewNodeRouteValues = new { Controller = "Services", Action = "TreeListPartialAddNew" };
         settings.SettingsEditing.UpdateNodeRouteValues = new { Controller = "Services", Action = "TreeListPartialUpdate" };
         settings.SettingsEditing.DeleteNodeRouteValues = new { Controller = "Services", Action = "TreeListPartialDelete" };
+        settings.SettingsEditing.BatchUpdateRouteValues = new { Controller = "Services", Action = "BatchEditingUpdateModel" };
 
         settings.CommandColumn.Visible = true;
         settings.CommandColumn.NewButton.Visible = true;
         settings.CommandColumn.DeleteButton.Visible = true;
         settings.CommandColumn.EditButton.Visible = true;
         settings.CommandColumn.ShowNewButtonInHeader = true;
-        settings.SettingsEditing.Mode = TreeListEditMode.PopupEditForm;
-        settings.SettingsPopup.EditForm.SettingsAdaptivity.Mode = PopupControlAdaptivityMode.Always;
-        settings.SettingsPopup.EditForm.SettingsAdaptivity.VerticalAlign = PopupAdaptiveVerticalAlign.WindowCenter;
+        settings.SettingsEditing.Mode = TreeListEditMode.Batch;
+        settings.SettingsEditing.AllowRecursiveDelete = true;
 
+        //settings.TreeListNodeIterator;
+        //settings.SettingsPopup.EditForm.SettingsAdaptivity.Mode = PopupControlAdaptivityMode.Always;
+        //settings.SettingsPopup.EditForm.SettingsAdaptivity.VerticalAlign = PopupAdaptiveVerticalAlign.WindowCenter;
+        settings.SettingsSelection.Enabled = true;
+        //settings.SettingsSelection.Recursive = EnableRecursiveSelection;
+        //settings.SettingsSelection.AllowSelectAll = AllowSelectAll;
         settings.KeyFieldName = "IdService";
         settings.ParentFieldName = "ParentKey";
+        //settings.Columns.Add(c =>
+        //{
+        //c.FieldName = "Nome";
+
+        //});
+        settings.Toolbars.Add(t =>
+        {
+            t.ItemAlign = GridToolbarItemAlign.Right;
+            t.Position = GridToolbarPosition.Bottom;
+            t.Items.Add(ti => ti.Command = TreeListToolbarCommand.Update);
+            t.Items.Add(ti => ti.Command = TreeListToolbarCommand.Cancel);
+        });
+
+        //settings.Columns.Add(
+    //column =>
+    //{
+        //column.FieldName = "Number Item";
+        //column.PropertiesEdit.DisplayFormatString = "{0:C}";
+        //column.ColumnType.
+    //}
+    //);
         settings.Columns.Add(
     column =>
     {
         column.FieldName = "Description";
+        column.ColumnType = MVCxTreeListColumnType.TextBox;
         column.Caption = "Descrição";
     }
-);
+    );
 
         settings.SettingsPager.Visible = true;
         settings.SettingsSelection.Enabled = true;

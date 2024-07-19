@@ -7,7 +7,7 @@
         settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Users", Action = "GridViewPartialAddNew" };
         settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Users", Action = "GridViewPartialUpdate" };
         settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "Users", Action = "GridViewPartialDelete" };
-        //settings.SettingsEditing.BatchUpdateRouteValues = new { Controller = "Users", Action = "GridViewPartialUpdate" }; 
+        //settings.SettingsEditing.BatchUpdateRouteValues = new { Controller = "Users", Action = "GridViewPartialUpdate" };
 
         settings.SettingsEditing.Mode = GridViewEditingMode.PopupEditForm;
         //settings.DeleteSelectedRowsRouteValues = new { Controller = "Home", Action = "EditingDeleteSelected" };
@@ -16,13 +16,14 @@
         settings.SettingsPopup.EditForm.SettingsAdaptivity.Mode = PopupControlAdaptivityMode.Always;
         settings.SettingsPopup.EditForm.SettingsAdaptivity.VerticalAlign = PopupAdaptiveVerticalAlign.WindowCenter;
 
-        settings.CommandColumn.Visible = true;
-        settings.CommandColumn.ShowNewButton = true;
-        settings.CommandColumn.ShowDeleteButton = true;
-        settings.CommandColumn.ShowEditButton = true;
+        settings.CommandColumn.Visible = false;
+        settings.CommandColumn.ShowNewButton = false;
+        settings.CommandColumn.ShowDeleteButton = false;
+        settings.CommandColumn.ShowEditButton = false;
         settings.SettingsBehavior.AllowFocusedRow = true;
         //settings.CommandColumn.SelectCheckBoxPosition = GridSelectCheckBoxPosition.Left;
         //settings.CommandColumn.SelectAllCheckboxMode = GridViewSelectAllCheckBoxMode.AllPages;
+        settings.ClientSideEvents.RowDblClick = "onGridViewRowDblClick";
 
         settings.KeyFieldName = "userId";
 
@@ -32,12 +33,14 @@
         settings.SettingsBehavior.AllowSelectByRowClick = true;
         settings.Width = Unit.Percentage(100);
 
+
+
         settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
         settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
         settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
         settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
         settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
-
+        settings.SettingsSearchPanel.CustomEditorName = "searchButtonEdit";
 
         settings.Columns.Add(c =>
         {
@@ -71,7 +74,11 @@
         {
             c.FieldName = "createdAt";
             c.Caption = "Data de criação";
-            c.ColumnType = MVCxGridViewColumnType.DateEdit;
+            c.EditorProperties().DateEdit(d =>
+            {
+                d.DisplayFormatString = "dd/MM/yyyy";
+            });
+
         });
 
 

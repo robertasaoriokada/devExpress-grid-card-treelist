@@ -1,4 +1,5 @@
 ﻿using DevExpress.Web.Mvc;
+using DXWebApplication1.Models;
 using DXWebApplication1.Models.DbAp;
 using System;
 using System.Collections.Generic;
@@ -12,8 +13,10 @@ namespace DXWebApplication1.Controllers
     public class ServicesController : Controller
     {
         // GET: Services
+        private readonly TreeListsService treeListsService = new TreeListsService();
         public ActionResult Index()
         {
+  
             return View();
         }
 
@@ -22,20 +25,24 @@ namespace DXWebApplication1.Controllers
         [ValidateInput(false)]
         public ActionResult TreeListPartial()
         {
-            var model = db.services;
-            return PartialView("~/Views/Services/_TreeListPartial.cshtml", model.ToList());
+            var model = treeListsService.ItemizacaoDosItens();
+            return PartialView("~/Views/Services/_TreeListPartial.cshtml", model);
         }
 
         [HttpPost, ValidateInput(false)]
         public ActionResult TreeListPartialAddNew(DXWebApplication1.Models.DbAp.service item)
         {
+
             var model = db.services;
             if (ModelState.IsValid)
             {
                 try
                 {
-                    model.Add(item);
+                    
+                    model.Add(item); 
+                    treeListsService.ItemizacaoDosItens();
                     db.SaveChanges();
+                    return PartialView("~/Views/Services/_TreeListPartial.cshtml", treeListsService.ItemizacaoDosItens());
                 }
                 catch (Exception e)
                 {
@@ -44,7 +51,8 @@ namespace DXWebApplication1.Controllers
             }
             else
                 ViewData["EditError"] = "Please, correct all errors.";
-            return PartialView("~/Views/Services/_TreeListPartial.cshtml", model.ToList());
+            treeListsService.ItemizacaoDosItens();
+            return PartialView("~/Views/Services/_TreeListPartial.cshtml", treeListsService.ItemizacaoDosItens());
         }
         [HttpPost, ValidateInput(false)]
         public ActionResult TreeListPartialUpdate(DXWebApplication1.Models.DbAp.service item)
@@ -58,6 +66,7 @@ namespace DXWebApplication1.Controllers
                     if (modelItem != null)
                     {
                         this.UpdateModel(modelItem);
+                        treeListsService.ItemizacaoDosItens();
                         db.SaveChanges();
                     }
                 }
@@ -68,7 +77,7 @@ namespace DXWebApplication1.Controllers
             }
             else
                 ViewData["EditError"] = "Please, correct all errors.";
-            return PartialView("~/Views/Services/_TreeListPartial.cshtml", model.ToList());
+            return PartialView("~/Views/Services/_TreeListPartial.cshtml", treeListsService.ItemizacaoDosItens());
         }
         [HttpPost, ValidateInput(false)]
         public ActionResult TreeListPartialDelete(System.Int32 IdService)
@@ -88,6 +97,7 @@ namespace DXWebApplication1.Controllers
                     ViewData["EditError"] = e.Message;
                 }
             }
+            treeListsService.ItemizacaoDosItens();
             return PartialView("~/Views/Services/_TreeListPartial.cshtml", model.ToList());
         }
 
@@ -107,9 +117,9 @@ namespace DXWebApplication1.Controllers
             {
                 DeletePost(postID, updateValues);
             }
-            var model = db.services;
-            
-            return PartialView("~/Views/Services/_TreeListPartial.cshtml", model.ToList());
+            //var model = db.services;
+            //treeListsService.ItemizacaoDosItens();
+            return PartialView("~/Views/Services/_TreeListPartial.cshtml", treeListsService.ItemizacaoDosItens());
         }
         protected void InsertNodesRecursive(MVCxTreeListNodeInfo<service> node, int? parentKey, MVCxTreeListBatchUpdateValues<service, int> updateValues)
         {
@@ -133,6 +143,8 @@ namespace DXWebApplication1.Controllers
                 }
             }
         }
+
+
 
         protected void UpdatePost(service post, MVCxTreeListBatchUpdateValues<service, int> updateValues)
         {

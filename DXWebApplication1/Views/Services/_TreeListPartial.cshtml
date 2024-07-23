@@ -10,26 +10,29 @@
         settings.SettingsEditing.BatchUpdateRouteValues = new { Controller = "Services", Action = "BatchEditingUpdateModel" };
 
         settings.CommandColumn.Visible = true;
+        settings.CommandColumn.Width = 50;
+        //settings.CommandColumn.NewButton.Image.Url = 
         settings.CommandColumn.NewButton.Visible = true;
         settings.CommandColumn.DeleteButton.Visible = true;
         settings.CommandColumn.EditButton.Visible = true;
         settings.CommandColumn.ShowNewButtonInHeader = true;
         settings.SettingsEditing.Mode = TreeListEditMode.Batch;
         settings.SettingsEditing.AllowRecursiveDelete = true;
+        settings.Width = Unit.Percentage(95);
 
-        //settings.TreeListNodeIterator;
         //settings.SettingsPopup.EditForm.SettingsAdaptivity.Mode = PopupControlAdaptivityMode.Always;
         //settings.SettingsPopup.EditForm.SettingsAdaptivity.VerticalAlign = PopupAdaptiveVerticalAlign.WindowCenter;
+
         settings.SettingsSelection.Enabled = true;
-        //settings.SettingsSelection.Recursive = EnableRecursiveSelection;
-        //settings.SettingsSelection.AllowSelectAll = AllowSelectAll;
+
+        //settings.SettingsSelection.Recursive = true;
+        //settings.ClientSideEvents.BatchEditChangesSaving = "Itemizacao";
+        settings.SettingsSelection.AllowSelectAll = true;
         settings.KeyFieldName = "IdService";
         settings.ParentFieldName = "ParentKey";
-        //settings.Columns.Add(c =>
-        //{
-        //c.FieldName = "Nome";
 
-        //});
+
+       
         settings.Toolbars.Add(t =>
         {
             t.ItemAlign = GridToolbarItemAlign.Right;
@@ -38,14 +41,16 @@
             t.Items.Add(ti => ti.Command = TreeListToolbarCommand.Cancel);
         });
 
-        //settings.Columns.Add(
-    //column =>
-    //{
-        //column.FieldName = "Number Item";
-        //column.PropertiesEdit.DisplayFormatString = "{0:C}";
-        //column.ColumnType.
-    //}
-    //);
+        settings.Columns.Add(
+        column =>
+        {
+            column.FieldName = "NumberItem";
+            column.Caption = "Item";
+            column.ReadOnly = true;
+            column.Width = 40;
+           
+        }
+        );
         settings.Columns.Add(
     column =>
     {

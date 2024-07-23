@@ -34,3 +34,8 @@ function onFilterPanelExpanded() {
 function adjustPageControls() {
     console.log("Entrou no panel");
 }
+
+function onCardDblClick(s, e) {
+    console.log(e);
+    s.StartEditCard(e.visibleIndex);
+}

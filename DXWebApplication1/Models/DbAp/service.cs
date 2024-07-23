@@ -23,6 +23,10 @@ namespace DXWebApplication1.Models.DbAp
 
         public int? ParentKey { get; set; }
 
+        //[Required]
+        [StringLength(50)]
+        public string NumberItem { get; set; } 
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<service> services1 { get; set; }
 

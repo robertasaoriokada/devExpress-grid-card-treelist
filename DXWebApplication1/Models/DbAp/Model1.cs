@@ -23,6 +23,10 @@ namespace DXWebApplication1.Models.DbAp
                 .IsUnicode(false);
 
             modelBuilder.Entity<service>()
+                .Property(e => e.NumberItem)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<service>()
                 .HasMany(e => e.services1)
                 .WithOptional(e => e.service1)
                 .HasForeignKey(e => e.ParentKey);

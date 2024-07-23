@@ -1,6 +1,11 @@
-﻿
+﻿@section Head {
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/TreeList.css")" />
+    <script type="text/javascript" src="@Url.Content("~/Content/TreeList.js")"></script>
+}
 @{
     ViewBag.Title = "Tree list";
 }
+
+@model List<DXWebApplication1.Models.DbAp.service>
 
 @Html.Action("TreeListPartial", "Services")

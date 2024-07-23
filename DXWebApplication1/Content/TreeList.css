@@ -1,0 +1,29 @@
+﻿body {
+   
+}
+
+#TreeList_DX-DnD-H-0 {
+    width: auto;
+}
+
+#TreeList_HDR {
+    background-color: darkslategray;
+}
+
+#TreeList_DXCBtn_-1_2_1 span {
+    
+}
+
+#headerPanel {
+    background-color: darkslategray;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#TreeList_D thead {
+    font-weight: bold;
+}
